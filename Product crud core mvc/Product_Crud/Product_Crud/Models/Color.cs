@@ -7,7 +7,8 @@ namespace Product_Crud.Models
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CId { get; set; }
-        public string CName { get; set; } = string.Empty;
-        public IList<Details>? Details { get; set; }
+        public string CName { get; set; }
+        public virtual IList<Details> Details { get; set; }
+    
     }
 }

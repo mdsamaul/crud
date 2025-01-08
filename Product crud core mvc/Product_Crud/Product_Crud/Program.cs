@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using Product_Crud.Data;
+using Product_Crud.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 

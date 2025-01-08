@@ -1,0 +1,66 @@
+﻿@model Product_Crud.Models.vm.ProductVm
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PId" />
+            <div class="form-group">
+                <label asp-for="PName" class="control-label"></label>
+                <input asp-for="PName" class="form-control" />
+                <span asp-validation-for="PName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsAviable" /> @Html.DisplayNameFor(model => model.IsAviable)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pdate" class="control-label"></label>
+                <input asp-for="Pdate" class="form-control" type="date" />
+                <span asp-validation-for="Pdate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageFile" class="control-label"></label>
+                <input asp-for="ImageFile" class="form-control" type="file" />
+                <img src="@Model.Image" width="50" height="50" />
+                <span asp-validation-for="ImageFile" class="text-danger"></span>
+            </div>
+            <div class="mt-2">
+                <div>
+                    <button class="btn btn-info addmore" type="button">Add More</button>
+                </div>
+                <div class="con">
+                    @foreach (var i in Model.Details)
+                    {
+                        <div class="d-flex rc my-1">
+                            <div class="me-2">
+                                <select asp-items="ViewBag.Color" id="CId" name="CId" class="form-control">
+                                    <option value="@i.Color.CId">---@i.Color.CName---</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-danger remove" type="button">Remove</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

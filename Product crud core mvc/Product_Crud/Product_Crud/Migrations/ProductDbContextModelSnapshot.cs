@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Product_Crud.Data;
+using Product_Crud.Models;
 
 #nullable disable
 
@@ -36,7 +36,7 @@ namespace Product_Crud.Migrations
 
                     b.HasKey("CId");
 
-                    b.ToTable("colors");
+                    b.ToTable("Colors");
                 });
 
             modelBuilder.Entity("Product_Crud.Models.Details", b =>
@@ -50,22 +50,16 @@ namespace Product_Crud.Migrations
                     b.Property<int>("CId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ColorsCId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductsPId")
                         .HasColumnType("int");
 
                     b.HasKey("DId");
 
-                    b.HasIndex("ColorsCId");
+                    b.HasIndex("CId");
 
-                    b.HasIndex("ProductsPId");
+                    b.HasIndex("PId");
 
-                    b.ToTable("details");
+                    b.ToTable("Details");
                 });
 
             modelBuilder.Entity("Product_Crud.Models.Product", b =>
@@ -82,34 +76,38 @@ namespace Product_Crud.Migrations
                     b.Property<bool>("IsAviable")
                         .HasColumnType("bit");
 
-                    b.Property<DateOnly>("PDate")
-                        .HasColumnType("date");
-
                     b.Property<string>("PName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("Pdate")
+                        .HasColumnType("date");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
 
                     b.HasKey("PId");
 
-                    b.ToTable("products");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Product_Crud.Models.Details", b =>
                 {
-                    b.HasOne("Product_Crud.Models.Color", "Colors")
+                    b.HasOne("Product_Crud.Models.Color", "Color")
                         .WithMany("Details")
-                        .HasForeignKey("ColorsCId");
+                        .HasForeignKey("CId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Product_Crud.Models.Product", "Products")
+                    b.HasOne("Product_Crud.Models.Product", "Product")
                         .WithMany("Details")
-                        .HasForeignKey("ProductsPId");
+                        .HasForeignKey("PId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Colors");
+                    b.Navigation("Color");
 
-                    b.Navigation("Products");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Product_Crud.Models.Color", b =>

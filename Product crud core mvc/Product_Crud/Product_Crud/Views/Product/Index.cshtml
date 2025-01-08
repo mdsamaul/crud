@@ -7,11 +7,14 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-warning">Create New</a>
 </p>
-<table class="table">
+<table class="table table-bordered">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.PId)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.PName)
             </th>
@@ -22,38 +25,62 @@
                 @Html.DisplayNameFor(model => model.IsAviable)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PDate)
+                @Html.DisplayNameFor(model => model.Pdate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Image)
             </th>
-            <th></th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsAviable)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAviable)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pdate)
+                </td>
+                <td>
+                    <img src="@item.Image" width="50" height="50" />
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.PId" class="btn btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.PId" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="12">
+                    <table class="table table-active text-center">
+                        <thead>
+                            <tr>
+                                <th>Color Id</th>
+                                <th>Color Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in item.Details)
+                            {
+                                <tr>
+                                    <td>@i.Color.CId</td>
+                                    <td>@i.Color.CName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
