@@ -1,0 +1,9 @@
+﻿@model Product_34.Models.Color
+    <div class="rc d-flex my-3">
+        <div class="me-2">
+            @Html.DropDownListFor(c=>c.CId, ViewBag.Color as SelectList, "---select Color---" , new {@class="form-control"})
+        </div>
+        <div>
+            @Html.ActionLink("Remove" ,"", null, new {@class="btn btn-danger remove"})
+        </div>
+    </div>

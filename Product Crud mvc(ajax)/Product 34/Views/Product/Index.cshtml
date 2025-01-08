@@ -1,0 +1,68 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<Product_34.Models.Product>
+
+@Html.ActionLink("Create", "Create",null, new {@class="btn btn-primary crBtn my-3 px-4"})
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Price</th>
+            <th>Date</th>
+            <th>Image</th>
+            <th>Is Aviable</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.PId</td>
+                <td>@product.PName</td>
+                <td>@product.Price</td>
+                <td>@product.Pdate</td>
+                <td><img src="@product.Image" width="50" height="50"/></td>
+                <td>@product.IsAviable</td>
+                <td>
+                    <button class="btn btn-warning edBtn" type="button" data-id="@product.PId">Edit</button>
+                    @Html.ActionLink("Delete","Delete", null, new { id = product.PId }, new {@class="btn btn-danger"})
+                </td>
+            </tr><tr>
+                <td colspan="13">
+                    <table class="table table-active text-center">
+                        <thead>
+                            <tr>
+                                <th>Color Id</th>
+                                <th>Color Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var i in product.Details) { 
+                                <tr>
+                                    <td>@i.Color.CId</td>
+                                    <td>@i.Color.CName</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<section class="mcon" style="display:none;">
+    <div class="mbod p-5">
+        <div class="macon"></div>
+        <hr />
+        <div class="modal-footer">
+            <button class="btn btn-danger clbtn">Close</button>
+        </div>
+    </div>
+</section>
+<section class="d-flex justify-content-center" id="pcon">
+    <div class="pagination">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+    </div>
+</section>
+

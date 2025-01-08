@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/PagedList.css" rel="stylesheet" />
+</head>
+<body>   
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(() => {           
+            $(".crBtn").click((e) => {
+                e.preventDefault();
+                $("#pcon").hide();
+                $.ajax({
+                    url: "/Product/Create",
+                    type: "get",
+                    success: (d) => {
+                        $(".macon").html(d);
+                        $(".mcon").show();
+                    }
+                });
+            });
+            $(".edBtn").click((e) => {
+                e.preventDefault();
+                var id = $(e.currentTarget).data("id");
+                $("#pcon").hide();
+                $.ajax({
+                    url: "/Product/Edit/"+id,
+                    type: "get",
+                    success: (d) => {
+                        $(".macon").html(d);
+                        $(".mcon").show();
+                    }
+                });
+            });
+            $(document).on("click", ".remove", (e) => {
+                e.preventDefault();
+                $(e.currentTarget).closest(".rc").remove();
+            })
+            $(".clbtn").click(() => {
+                $(".mcon").hide();
+                $(".pcon").show();
+            })
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.mcon{
+    width:100vw;
+    height:100vh;
+    background-color:rgba(0,0,0,.2);
+    position:fixed;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:1000;
+}
+.mbod{
+    width: 50%;
+    max-height: 80vh;
+    background-color: #fff;
+    overflow: scroll;
+    scrollbar-width: none;
+}
